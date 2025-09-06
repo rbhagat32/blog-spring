@@ -19,9 +19,9 @@ public class BlogService {
         return blogRepository.findAll();
     }
 
-    public void createBlog(BlogModel blog) {
+    public BlogModel createBlog(BlogModel blog) {
         blog.setCreatedAt(new Date());
-        blogRepository.save(blog);
+        return blogRepository.save(blog);
     }
 
     public Optional<BlogModel> getBlogById(ObjectId blogId) {
@@ -29,15 +29,15 @@ public class BlogService {
     }
 
     public BlogModel updateBlogById(ObjectId blogId, BlogModel newBlog) {
-        BlogModel oldBlog = getBlogById(blogId).orElse(null);
+        BlogModel blog = getBlogById(blogId).orElse(null);
 
-        if(oldBlog != null){
-            oldBlog.setTitle(newBlog.getTitle()!= null && !newBlog.getTitle().isEmpty() ? newBlog.getTitle() : oldBlog.getTitle());
-            oldBlog.setContent(newBlog.getContent()!= null && !newBlog.getTitle().isEmpty() ? newBlog.getContent() : oldBlog.getContent());
-            blogRepository.save(oldBlog);
+        if (blog != null){
+            blog.setTitle(newBlog.getTitle()!= null && !newBlog.getTitle().isEmpty() ? newBlog.getTitle() : blog.getTitle());
+            blog.setContent(newBlog.getContent()!= null && !newBlog.getTitle().isEmpty() ? newBlog.getContent() : blog.getContent());
+            blogRepository.save(blog);
         }
 
-        return oldBlog;
+        return blog;
     }
 
     public Optional<BlogModel> deleteBlogById(ObjectId blogId) {
