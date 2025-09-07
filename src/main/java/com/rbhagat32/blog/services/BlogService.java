@@ -15,7 +15,7 @@ public class BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
-    public List<BlogModel> getAllBlogs(){
+    public List<BlogModel> getAllBlogs() {
         return blogRepository.findAll();
     }
 
